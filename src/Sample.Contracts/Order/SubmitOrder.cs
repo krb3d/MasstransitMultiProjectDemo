@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Sample.Contracts
+namespace Sample.Contracts.Order
 {
     public interface SubmitOrder
     {
-        Guid OrderId { get; }
         DateTime Timestamp { get; }
-
+        Guid CorrelationId { get; }
+        Guid OrderId { get; }
         string CustomerNumber { get; }
     }
 }

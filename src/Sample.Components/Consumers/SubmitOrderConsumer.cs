@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using Sample.Contracts;
+using Sample.Contracts.Order;
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +9,14 @@ namespace Sample.Components.Consumers
     {
         public async Task Consume(ConsumeContext<SubmitOrder> context)
         {
-            throw new NotImplementedException();
+            await context.RespondAsync<OrderSubmissionAccepted>(
+                new
+                {
+                    Timestamp = InVar.Timestamp,
+                    CorrelationId = context.Message.CorrelationId,
+                    OrderId = context.Message.OrderId,
+                    CustomerNumber = context.Message.CustomerNumber,
+                });
         }
     }
 }
